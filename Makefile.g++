@@ -1,0 +1,41 @@
+TARGET   = LolLauncher.exe
+CXX      = g++
+CXXFLAGS = -Wall -g
+LDFLAGS  = -s
+
+SRC := $(wildcard src/*.cpp)
+OBJ := $(patsubst src/%.cpp, obj/%.o, $(SRC))
+DEP := $(patsubst %.o, %.d, $(OBJ))
+
+.PHONY: all
+all: bin/$(TARGET) clean_deps
+	@echo done.
+
+bin/$(TARGET): $(OBJ)
+	@echo linking...
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $(OBJ)
+	@echo link finished.
+
+obj/%.d: src/%.cpp
+	@$(CXX) $(CXXFLAGS) -MM -MT obj/$*.o $< -MF $@
+
+ifeq ($(MAKECMDGOALS), clean)
+else ifeq ($(MAKECMDGOALS), clean_deps)
+else
+-include $(DEP)
+endif
+obj/%.o: src/%.cpp
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
+
+.PHONY: clean_deps
+clean_deps:
+	@del obj\*.d 2>nul
+
+.PHONY: rebuild
+rebuild: clean all
+
+.PHONY: clean
+clean:
+	@echo cleaning...
+	@del /S obj\*.o bin\*.exe 2>nul
+	@echo finished.

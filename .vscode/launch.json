@@ -1,0 +1,26 @@
+{
+    "version": "0.2.0",
+    "configurations": [{
+            "name": "C++ Launch (Windows)",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceRoot}/bin/LolLauncher.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceRoot}",
+            "environment": [],
+            "externalConsole": false,
+            "internalConsoleOptions": "openOnSessionStart",
+            "preLaunchTask": "build",
+            "logging": {
+                "moduleLoad": false
+            }
+        },
+        {
+            "name": "C++ Attach (Windows)",
+            "type": "cppvsdbg",
+            "request": "attach",
+            "processId": "${command.pickProcess}"
+        }
+    ]
+}

@@ -25,8 +25,7 @@ class TcpServer
     std::exception_ptr eSend;
     std::atomic_int activate = -1;
 
-    static void cleanup(SOCKET socket = INVALID_SOCKET);
-    static std::string getErrMsg(const char *tag, int err_no);
+    std::string getErrMsg(const char *tag, int err_no);
     SOCKET bind();
     void communicate(SOCKET socket);
     void recvLoop(SOCKET socket);

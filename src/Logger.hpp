@@ -10,7 +10,7 @@ class Logger
     class Log
     {
       private:
-        std::ostream os;
+        std::unique_ptr<std::ostream> os;
         std::mutex logMutex;
 
         void write();
@@ -19,8 +19,9 @@ class Logger
 
       public:
         Log(const std::ostream &os);
-        Log(std::ostream &&os);
-        bool init(std::ostream &os);
+        Log(std::ostream *os);
+        bool init(const std::ostream &os);
+        bool init(std::ostream *os);
         template <typename... Args>
         void writeln(Args &&... msgs);
     };
@@ -33,7 +34,7 @@ class Logger
 
   public:
     static bool create(int id, const std::ostream &os);
-    static bool create(int id, std::ostream &&os);
+    static bool create(int id, std::ostream *os);
     template <typename... Args>
     static void log(int id, Args &&... msgs);
 };

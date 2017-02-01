@@ -30,6 +30,12 @@
         "xstring": "cpp",
         "*hpp*hpp*hpp*hppvector": "cpp",
         "vector": "cpp",
-        "deque": "cpp"
+        "deque": "cpp",
+        "ostream": "cpp",
+        "ios": "cpp",
+        "sstream": "cpp",
+        "xlocbuf": "cpp",
+        "*hpparray": "cpp",
+        "xlocale": "cpp"
     }
 }

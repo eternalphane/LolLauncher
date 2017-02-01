@@ -2,7 +2,9 @@
 #include "Error.hpp"
 #include <cstdio>
 #include <fstream>
+#include <iomanip>
 #include <memory>
+#include <sstream>
 
 std::pair<DWORD, PROCESS_INFORMATION> Util::createProcess(
     const std::string &exec,
@@ -65,4 +67,20 @@ nlohmann::json Util::getConf(const std::string &path)
     nlohmann::json j;
     f >> j;
     return j;
+}
+
+std::string Util::getHex(unsigned byte)
+{
+    std::ostringstream oss;
+    oss << "0x" << std::hex << std::setw(2) << std::setfill('0') << byte;
+    return oss.str();
+}
+
+std::string Util::getHex(const std::vector<char> &data)
+{
+    std::ostringstream oss;
+    oss << std::hex;
+    for (auto byte : data)
+        oss << std::setw(2) << std::setfill('0') << (int)(unsigned char)byte << ' ';
+    return oss.str();
 }

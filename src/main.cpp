@@ -13,19 +13,18 @@ bool flag = true;
 int main()
 {
     auto conf = Util::getConf("conf.json");
-    Launcher launcher(
-        DEFAULT_CLIENT_PORT,
-        DEFAULT_GAME_PORT,
-        conf["lolRootPath"],
-        conf["gameSignatureLength"],
-        conf["szGameSignature"],
-        conf["cltkeyLength"],
-        conf["cltkey"],
-        conf["uId"],
-        conf["host"],
-        conf["xmppServerUrl"],
-        conf["lqUri"],
-        conf["getClientIpUrl"]);
+    Launcher launcher(DEFAULT_CLIENT_PORT,
+                      DEFAULT_GAME_PORT,
+                      conf["lolRootPath"],
+                      conf["gameSignatureLength"],
+                      conf["szGameSignature"],
+                      conf["cltkeyLength"],
+                      conf["cltkey"],
+                      conf["uId"],
+                      conf["host"],
+                      conf["xmppServerUrl"],
+                      conf["lqUri"],
+                      conf["getClientIpUrl"]);
     launcher.launch();
     signal(SIGINT, [](int sig) { flag = false; });
     while (flag)

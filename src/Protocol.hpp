@@ -57,14 +57,13 @@ class Protocol
             unsigned head1;
             unsigned command;
             unsigned body_len;
-        } header;
+        } header{0x10, 0x01, 0xff, 0x00};
         raw_bytes body;
 
         bool complete();
     } packet;
     Listener listener;
 
-    static void headerSwapEndian(Packet::Header &header);
     bool makePacket(message &&msg);
 
   public:
